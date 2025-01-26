@@ -27,9 +27,9 @@ const AddPost = ({ onPostAdded }: { onPostAdded: () => void }) => {
     try {
       const formData = new FormData();
       formData.append("file", imageFile);
-      formData.append("upload_preset", CLOUDINARY_PRESET);
+      formData.append("upload_preset", import.meta.env.VITE_CLOUDINARY_URL);
 
-      const response = await fetch(CLOUDINARY_URL, {
+      const response = await fetch(import.meta.env.VITE_APP_CLOUDINARY_PRESET, {
         method: "POST",
         body: formData,
       });
