@@ -44,7 +44,7 @@ export const addPost = async (imageURL: string, username: string) => {
 // Fetch posts with pagination
 
 export const fetchPosts = async (lastVisible: any) => {
-  const DEFAULT_LIMIT = 100;
+  const DEFAULT_LIMIT = 2;
 
   try {
     const baseQuery = query(

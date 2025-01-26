@@ -12,7 +12,7 @@ const Feeds = () => {
   const [posts, setPosts] = useState<PostInterFace[]>([]);
   const [lastVisible, setLastVisible] = useState<QueryDocumentSnapshot<DocumentData> | null>(null);
   const [loading, setLoading] = useState(false);
-
+  const [count, setCount] = useState(1);
   const loadPosts = useCallback(
     async (resetPosts = false) => {
       setLoading(true);
@@ -39,12 +39,34 @@ const Feeds = () => {
         setLoading(false);
       }
     },
-    [loading, lastVisible]
+    [loading, lastVisible,count]
   );
-
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          // Use non-null assertion or optional chaining
+          const lastImage = document.querySelector(".infiniteScrollItem:last-child");
+          if (lastImage) {
+            observer.unobserve(lastImage);
+          }
+          setCount((prevCount) => prevCount + 1);
+        }
+      },
+      { threshold: 1 }
+    );
+  
+    const lastImage = document.querySelector(".infiniteScrollItem:last-child");
+    if (lastImage) {
+      observer.observe(lastImage);
+    }
+  
+    // Change to direct disconnect without 'current'
+    return () => observer.disconnect();
+  }, [posts]);
   useEffect(() => {
     loadPosts();
-  }, []);
+  }, [count]);
 
   const handlePostAdded = () => {
     loadPosts(true);
@@ -60,10 +82,11 @@ const Feeds = () => {
           {posts.length === 0 && !loading && (
             <p className="text-center text-lg">No posts to display.</p>
           )}
+          <div className="infiniteScrollContainer">
           {posts.map((post) => (
             <div
               key={post.id}
-              className="mb-6 p-4 bg-white  rounded-lg transition-all duration-300"
+              className="mb-6 p-4 bg-white  rounded-lg transition-all duration-300 infiniteScrollItem"
             >
               <Post
                 post={post}
@@ -72,6 +95,8 @@ const Feeds = () => {
               />
             </div>
           ))}
+          </div>
+          
           { !loading && posts.length !== 0 && (
             <p className="text-center text-lg">No more posts to load.</p>
           )}
