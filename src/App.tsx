@@ -13,6 +13,7 @@ import AppBar from "./components/Nav";
 import SavedPosts from "./components/SavedPosts";
 import MyPosts from "./components/MyPosts";
 import { auth } from "./firebase/firebase-config";
+import NotFound from "./components/NotFound";
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const user = auth.currentUser?.uid;
@@ -76,6 +77,7 @@ const App = () => {
               </UnprotectedRoute>
             }
           />
+              <Route path="*" element={<NotFound />} />  
         </Routes>
       </Router>
     </>

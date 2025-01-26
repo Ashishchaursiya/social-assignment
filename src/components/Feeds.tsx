@@ -8,7 +8,6 @@ import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 import { PostInterFace } from "../utils/interface";
  
 const Feeds = () => {
-  console.log("crdential",import.meta.env.VITE_CLOUDINARY_URL);
   const userId = auth?.currentUser?.uid;
   const [posts, setPosts] = useState<PostInterFace[]>([]);
   const [lastVisible, setLastVisible] = useState<QueryDocumentSnapshot<DocumentData> | null>(null);

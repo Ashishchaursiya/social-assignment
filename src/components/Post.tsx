@@ -209,7 +209,7 @@ const Post = ({
   };
 
   return (
-    <div className="w-full sm:max-w-sm mx-auto bg-white rounded-lg shadow-lg mb-6 sm:p-4 p-3">
+    <div className="w-full sm:max-w-sm mx-auto bg-white rounded-lg shadow-lg mb-6 p-2 sm:p-4">
       <img
         src={post.imageURL}
         alt="Post"
@@ -226,7 +226,7 @@ const Post = ({
             onClick={handleLike}
           >
             {isLiked ? LikedIcon() : NotLikedIcon()}
-            <span className="ml-1">{likes.length}</span>
+            <span className="ml-[7px]">{likes.length}</span>
           </div>
 
           <div

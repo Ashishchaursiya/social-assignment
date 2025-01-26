@@ -5,6 +5,7 @@ import Post from "./Post";
 import Loader from "./Loader";
 import { PostInterFace } from "../utils/interface";
 import { Link } from "react-router-dom";
+import { TrashIcon } from "../utils/icons";
 
 const MyPosts = () => {
   const [myPosts, setMyPosts] = useState<PostInterFace[]>([]);
@@ -42,15 +43,15 @@ const MyPosts = () => {
     }
   };
 
-  return (
-    <div className="flex flex-col space-y-4 mt-4">
+  return <> 
+    <div className="flex flex-wrap gap-10 sm:mt-4 p-3 sm:p-0">
       {loading && <Loader />}
 
       {myPosts.length === 0 && !loading ? (
         <p className="text-center text-lg">No posts found.</p>
       ) : (
         myPosts.map((post) => (
-          <div key={post.id} className="relative mb-4">
+          <div key={post.id} className="relative w-full sm:w-auto mb-4">
             <Post
               post={post}
               currentUserId={user.uid}
@@ -61,12 +62,14 @@ const MyPosts = () => {
                 onClick={() => handleDelete(post.id)}
                 className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-lg cursor-pointer"
               >
-                Delete
+                {TrashIcon()}
               </button>
             )}
           </div>
         ))
       )}
+     
+    </div>
       {!loading && (
         <div className="flex justify-center items-center">
           <Link
@@ -77,8 +80,7 @@ const MyPosts = () => {
           </Link>
         </div>
       )}
-    </div>
-  );
+  </>
 };
 
 export default MyPosts;

@@ -55,7 +55,8 @@ const AddPost = ({ onPostAdded }: { onPostAdded: () => void }) => {
   };
 
   return (
-    <div className="flex items-center justify-center w-full py-4">
+    <div className="sticky top-0 z-10 bg-white">
+ <div className="flex items-center justify-center w-full py-4">
       {loading && <Loader />}
       <form
         onSubmit={handlePostSubmit}
@@ -87,6 +88,8 @@ const AddPost = ({ onPostAdded }: { onPostAdded: () => void }) => {
         </button>
       </form>
     </div>
+    </div>
+    
   );
 };
 
