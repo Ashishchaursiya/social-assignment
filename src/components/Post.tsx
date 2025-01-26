@@ -102,7 +102,9 @@ const Post = ({
   const [comments, setComments] = useState<Comment[]>([]);
   const [showComments, setShowComments] = useState(false);
   const [newComment, setNewComment] = useState("");
-  const [isLiked, setIsLiked] = useState(likes.includes(currentUserId));
+  const [isLiked, setIsLiked] = useState(
+    typeof currentUserId === 'string' ? likes.includes(currentUserId) : false
+  );
   const [isSaved, setIsSaved] = useState(false);
 
   const { user } = useAuth();
