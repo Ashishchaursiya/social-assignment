@@ -86,12 +86,13 @@ const Feeds = () => {
           {posts.map((post) => (
             <div
               key={post.id}
-              className="mb-6 p-4 bg-white  rounded-lg transition-all duration-300 infiniteScrollItem"
+              className="p-4 bg-white  rounded-lg transition-all duration-300 infiniteScrollItem"
             >
               <Post
                 post={post}
                 currentUserId={userId}
                 setLoading={setLoading}
+                updatePost={() => {}}
               />
             </div>
           ))}

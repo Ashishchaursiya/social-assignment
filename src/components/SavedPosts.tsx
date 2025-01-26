@@ -10,6 +10,7 @@ const SavedPosts = () => {
   const [savedPosts, setSavedPosts] = useState<PostInterFace[]>([]);
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [isPostUpdated, setIsPostUpdated] = useState(0);
 
   useEffect(() => {
     const getSavedPosts = async () => {
@@ -26,14 +27,14 @@ const SavedPosts = () => {
     };
 
     getSavedPosts();
-  }, [user]);
+  }, [isPostUpdated,user]);
 
   return <> 
     <div className="flex flex-wrap gap-10 sm:mt-4 p-3 sm:p-0">
       {loading && <Loader />}
 
       {!loading && savedPosts.length === 0 ? (
-        <p className="text-center text-lg">No saved posts found.</p>
+        <div className="w-50 mx-auto text-center text-lg">No saved posts found.</div>
       ) : (
         savedPosts.map((post) => (
           <div key={post.id} className="relative w-full sm:w-auto mb-4"> 
@@ -42,6 +43,7 @@ const SavedPosts = () => {
             post={post}
             currentUserId={user.uid}
             setLoading={setLoading}
+            updatePost={ () => setIsPostUpdated((prev) => prev + 1) }
           />
           </div>
          

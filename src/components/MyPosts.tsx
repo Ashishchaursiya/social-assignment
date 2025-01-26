@@ -48,7 +48,7 @@ const MyPosts = () => {
       {loading && <Loader />}
 
       {myPosts.length === 0 && !loading ? (
-        <p className="text-center text-lg">No posts found.</p>
+        <div className="w-50 mx-auto text-center text-lg">No posts found.</div>
       ) : (
         myPosts.map((post) => (
           <div key={post.id} className="relative w-full sm:w-auto mb-4">
@@ -56,6 +56,7 @@ const MyPosts = () => {
               post={post}
               currentUserId={user.uid}
               setLoading={setLoading}
+              updatePost={() => {}}
             />
             {!loading && (
               <button

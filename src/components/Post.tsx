@@ -14,6 +14,7 @@ import {
   NotBookMarked,
   NotLikedIcon,
 } from "../utils/icons";
+import { PostInterFace } from "../utils/interface";
 
 interface Comment {
   id?: string;
@@ -90,10 +91,12 @@ const Post = ({
   post,
   currentUserId,
   setLoading,
+  updatePost= () => {}
 }: {
-  post: any;
+  post: PostInterFace;
   currentUserId: string | null | undefined;
   setLoading: (loading: boolean) => void;
+  updatePost: () => void;
 }) => {
   const [likes, setLikes] = useState(post.likes || []);
   const [comments, setComments] = useState<Comment[]>([]);
@@ -149,6 +152,7 @@ const Post = ({
         await savePost(post.id, user.uid);
         setIsSaved(true);
       }
+      updatePost();
     } catch (error) {
       console.error("Error saving/unsaving post:", error);
     } finally {
@@ -209,7 +213,7 @@ const Post = ({
   };
 
   return (
-    <div className="w-full sm:max-w-sm mx-auto bg-white rounded-lg shadow-lg mb-6 p-2 sm:p-4">
+    <div className="w-full sm:max-w-sm mx-auto bg-white rounded-lg shadow-lg mb-1 p-2 sm:p-4">
       <img
         src={post.imageURL}
         alt="Post"
