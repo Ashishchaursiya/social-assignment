@@ -4,8 +4,6 @@ import { toast } from "react-toastify";
 import Loader from "./Loader";
 
 const AddPost = ({ onPostAdded }: { onPostAdded: () => void }) => {
-  const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/drcpultl3/upload";
-  const CLOUDINARY_PRESET = "social";
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
 
