@@ -4,58 +4,59 @@ import { useAuth } from "../hooks/useAuth";
 const AppBar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  console.log("user", user);
+
   return (
     <div className="p-4 flex justify-between items-center text-gray-800 shadow-lg">
-      <div className="text-xl font-semibold">
+      <div className="text-xl font-semibold hidden sm:block">
         <Link to="/" className="hover:text-blue-500">
           Socify
         </Link>
       </div>
 
       {user ? (
-        <div className="flex items-center space-x-4">
-          <span className="mr-2 font-medium">
+        <div className="flex items-center space-x-2 sm:space-x-4">
+          <span className="hidden sm:inline font-medium">
             Welcome, {user.displayName ?? user?.email}
           </span>
-          <div className="flex items-center space-x-4">
-            <Link
-              to="/my-post"
-              className="font-medium text-gray-800 border border-black px-3 py-1.5 rounded hover:bg-black hover:text-white   flex items-center space-x-1"
-            >
-              <span>My Posts</span>
-            </Link>
-            <Link
-              to="/saved-post"
-              className="font-medium text-gray-800 border border-black px-3 py-1.5 rounded   hover:bg-black hover:text-white  flex items-center space-x-1"
-            >
-              <span>Saved Posts</span>
-            </Link>
-          </div>
+
+          <Link
+            to="/my-post"
+            className="text-sm sm:text-base font-medium text-gray-800 border border-black px-2 sm:px-3 py-1 rounded hover:bg-black hover:text-white transition-all"
+          >
+            My Posts
+          </Link>
+
+          <Link
+            to="/saved-post"
+            className="text-sm sm:text-base font-medium text-gray-800 border border-black px-2 sm:px-3 py-1 rounded hover:bg-black hover:text-white transition-all"
+          >
+            Saved Posts
+          </Link>
 
           <button
             onClick={async () => {
               await logout();
               navigate("/login");
             }}
-            className="cursor-pointer text-white bg-black py-2 px-4 rounded-md hover:bg-gray-800 transition-all duration-300"
+            className="text-sm sm:text-base cursor-pointer text-white bg-black px-3 sm:px-4 py-1.5 rounded hover:bg-gray-800 transition-all"
           >
             Logout
           </button>
         </div>
       ) : (
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 sm:space-x-4">
           <Link
             to="/login"
-            className="font-bold text-gray-800 hover:text-blue-500 flex items-center space-x-1"
+            className="text-sm sm:text-base font-bold text-gray-800 hover:text-blue-500"
           >
-            <span>Login</span>
+            Login
           </Link>
+
           <Link
             to="/register"
-            className="font-bold text-gray-800 hover:text-green-500 flex items-center space-x-1"
+            className="text-sm sm:text-base font-bold text-gray-800 hover:text-green-500"
           >
-            <span>Register</span>
+            Register
           </Link>
         </div>
       )}

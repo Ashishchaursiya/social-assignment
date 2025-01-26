@@ -209,11 +209,11 @@ const Post = ({
   };
 
   return (
-    <div className="w-full max-w-sm mx-auto bg-white rounded-lg shadow-lg mb-6 p-4">
+    <div className="w-full sm:max-w-sm mx-auto bg-white rounded-lg shadow-lg mb-6 p-4">
       <img
         src={post.imageURL}
         alt="Post"
-        className="w-90 h-74 object-cover rounded-lg shadow-md"
+        className="w-full sm:w-90 h-74 object-cover rounded-lg shadow-md"
       />
       <div className="flex justify-between items-center mt-4">
         <h4 className="font-semibold">{post.username}</h4>
