@@ -4,13 +4,14 @@ import Post from "./Post";
 import { auth } from "../firebase/firebase-config";
 import Loader from "./Loader";
 import AddPost from "./AddPost";
-
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+import { PostInterFace } from "../utils/interface";
+ 
 const Feeds = () => {
   const userId = auth?.currentUser?.uid;
-  const [posts, setPosts] = useState([]);
-  const [lastVisible, setLastVisible] = useState(null);
+  const [posts, setPosts] = useState<PostInterFace[]>([]);
+  const [lastVisible, setLastVisible] = useState<QueryDocumentSnapshot<DocumentData> | null>(null);
   const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
 
   const loadPosts = useCallback(
     async (resetPosts = false) => {
@@ -19,11 +20,11 @@ const Feeds = () => {
       try {
         const { posts: newPosts, lastVisible: newLastVisible } =
           await fetchPosts(resetPosts ? null : lastVisible);
-        console.log("newLastVisible", newLastVisible);
+        
         if (newPosts.length === 0) {
           //setHasMore(false);
         } else {
-          setPosts((prev) =>
+          setPosts((prev: PostInterFace[]) =>
             [...prev, ...newPosts].filter(
               (post, index, self) =>
                 index === self.findIndex((p) => p.id === post.id)
@@ -71,7 +72,7 @@ const Feeds = () => {
               />
             </div>
           ))}
-          {!hasMore && !loading && posts.length !== 0 && (
+          { !loading && posts.length !== 0 && (
             <p className="text-center text-lg">No more posts to load.</p>
           )}
         </div>

@@ -1,3 +1,4 @@
+import { PostInterFace } from "../utils/interface";
 import { db, auth } from "./firebase-config";
 import {
   collection,
@@ -322,7 +323,7 @@ export const fetchMyPosts = async (userId: string) => {
     const postsRef = collection(db, "posts");
     const userPostsQuery = query(postsRef, where("userId", "==", userId));
     const querySnapshot = await getDocs(userPostsQuery);
-    const myPosts = [];
+    const myPosts:PostInterFace[] = [];
     querySnapshot.forEach((doc) => {
       myPosts.push({ id: doc.id, ...doc.data() });
     });

@@ -92,7 +92,7 @@ const Post = ({
   setLoading,
 }: {
   post: any;
-  currentUserId: string;
+  currentUserId: string | null | undefined;
   setLoading: (loading: boolean) => void;
 }) => {
   const [likes, setLikes] = useState(post.likes || []);

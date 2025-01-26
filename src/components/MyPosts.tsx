@@ -3,9 +3,10 @@ import { fetchMyPosts, deletePost } from "../firebase/firebase-functions";
 import { useAuth } from "../hooks/useAuth";
 import Post from "./Post";
 import Loader from "./Loader";
+import { PostInterFace } from "../utils/interface";
 
 const MyPosts = () => {
-  const [myPosts, setMyPosts] = useState([]);
+  const [myPosts, setMyPosts] =  useState<PostInterFace[]>([]);
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
 
